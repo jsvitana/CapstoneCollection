@@ -1,37 +1,23 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, Text, View, Button, TabBarIOS } from 'react-native';
 import Home from "./components/Home";
 import test from "./components/test";
-import { createAppContainer } from "react-navigation";
-import {createStackNavigator} from "react-navigation-stack";
 import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 export default class App extends React.Component {
   render() {
+    
+    const Tab = createBottomTabNavigator();
+    
     return (
-      <View style={styles.container}> 
-        <AppContainer/>
-        <Text style={styles.navigation}>Hello</Text> 
-      </View>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={Home} />
+          <Tab.Screen name="Test" component={test} />
+        </Tab.Navigator>
+      </NavigationContainer>
     );
-  }
+  }  
 }
-
-const MainNavigator = createStackNavigator({
-  HomePage: {screen: Home},
-  test:{screen: test}
-},
-{
-  initialRouteParams: "Home"
-});
-
-const AppContainer = createAppContainer(MainNavigator);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  navigation: {
-    flex: 1
-  }
-});

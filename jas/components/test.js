@@ -1,18 +1,20 @@
 import React from "react";
-import {View,Text, StyleSheet} from "react-native";
-import 'react-native-gesture-handler';    
+import {View,Text, StyleSheet} from "react-native";   
 
 export default class test extends React.Component {
-    static navigationOptions = {
-        title:"Test",
-
-    }
-
     render() {
         return(
-            <View>
+            <View style={styles.container}>
                 <Text>Test</Text>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+  });
