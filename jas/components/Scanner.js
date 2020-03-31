@@ -1,8 +1,8 @@
 import React from "react";
 import {View,Text, Button, StyleSheet} from "react-native"; 
 import API from "./../API/APICalls.js"
- 
-export default class test extends React.Component {
+
+export default class Scanner extends React.Component {
 
     constructor(props) {
         super(props)
