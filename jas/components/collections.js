@@ -1,12 +1,11 @@
 import React from "react";
-import {View,Text,Button, StyleSheet} from "react-native";   
-import { HeaderBackground } from "react-navigation-stack";
+import {View,Text, StyleSheet} from "react-native";   
 
-export default class Home extends React.Component {
+export default class test extends React.Component {
     render() {
         return(
             <View style={styles.container}>
-                <Text style={styles.header}>Ready to start collecting?</Text>
+                <Text style={styles.header}>Collections</Text>
                 <Text>test</Text>
                 <Text>test 2</Text>
             </View>
