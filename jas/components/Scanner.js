@@ -1,6 +1,7 @@
 import React from "react";
-import {View,Text, Button, StyleSheet} from "react-native"; 
+import {View,Text, Button, TextInput, StyleSheet} from "react-native"; 
 import API from "./../API/APICalls.js"
+import CamScan from "./CamScan"
 
 export default class Scanner extends React.Component {
 
@@ -8,30 +9,42 @@ export default class Scanner extends React.Component {
         super(props)
 
         this.state = {
-            title: "kkkkk"
+            title: "",
+            UPCCode: ""
         }
     }
 
     async GetItem() {
         console.log("Loaded");
+        console.log(this.state.UPCCode)
         var api = new API();
-        var item = await api.GetBarcodeItem("00"); 
+        var item = await api.GetBarcodeItem(this.state.UPCCode); 
         console.log(item) 
-        if(item.item_response.code == 200) {
-            this.setState({title: item.item_attributes.title});
+        if(item == false) {
+            alert("This is not a UPC we have, please try another.")
         }       
         else {
-            this.setState({title: "This is not a UPC we have, please try another."})
+            alert(item.item_attributes.title); 
         }  
+    }
+
+    handleText = (text) => {
+        this.setState({UPCCode: text})
     }
 
     render() {
         return(
             <View style={styles.container}>
-                <Text>{this.state.title}</Text>
-                <Button title="test" onPress={() => this.GetItem()}>
+                <View style={styles.manualEntry}>
+                    <Text>Manual Barcode Entry</Text>
+                    <TextInput style={styles.textInput} placeholder = "UPC Code..." onChangeText = {this.handleText} />
+                    <Button title="Submit" onPress={() => this.GetItem()} />
+                </View>
 
-                </Button>
+                <View style={styles.cameraEntry} on>
+                    <Text>Use Your Camera</Text>
+                </View>
+                
             </View>
 
         )
@@ -44,4 +57,20 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center'
     },
+    manualEntry: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    cameraEntry: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    textInput: {
+        margin: 25,
+        height: 30,
+        width: 200,
+        borderWidth: 1
+    }
   });

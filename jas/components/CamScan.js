@@ -17,8 +17,13 @@ export default function App() {
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
     var api = new API();
-    var item = await api.GetBarcodeItem(data); 
-    alert(item.item_attributes.title);
+    var item = await api.GetBarcodeItem(data);
+    if(item == false) {
+      alert("This is not a UPC we have, please try another.");
+    } 
+    else {
+      alert(item.item_attributes.title);
+    }
   };
 
   if (hasPermission === null) {

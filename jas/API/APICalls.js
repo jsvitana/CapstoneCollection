@@ -10,7 +10,12 @@ class API {
             .then(response => response.json())
             .then((response) => {
                 console.log(response.item_response)
-                item = response
+                if(response.item_response.code == 200) {
+                    item = response
+                }
+                else {
+                    item = false
+                }
                 resolve(item);
             })
         });
