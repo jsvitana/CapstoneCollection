@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, TabBarIOS, Settings } from 'react-native';
 import Home from "./components/Home";
 import collections from "./components/collections";
 import settings from "./components/settings";
@@ -8,6 +7,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 export default class App extends React.Component {
+
   render() {
     
     const Tab = createBottomTabNavigator();
