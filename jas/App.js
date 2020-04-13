@@ -20,6 +20,8 @@ export default class App extends React.Component {
           <Tab.Screen name="Home" component={Home} options={{unmountOnBlur:true}} />
           <Tab.Screen name="Collections" component={collections} options={{unmountOnBlur:true}} />
           <Tab.Screen name="Settings" component={settings} />
+          <Tab.Screen name="Scanner" component={Scanner} options={{unmountOnBlur: true}}/>
+          <Tab.Screen name="CamScan" component={CamScan}  options={{unmountOnBlur: true}} />
         </Tab.Navigator>
       </NavigationContainer>
     );

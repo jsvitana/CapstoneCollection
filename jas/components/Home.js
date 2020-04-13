@@ -2,7 +2,12 @@ import React from "react";
 import {View,Text, StyleSheet} from "react-native";   
 import style from "./../styles/styles.json" 
 
+
 export default class Home extends React.Component {
+    constructor() {
+        super();
+    }
+
     render() {
         return(
             <View style={{color: "#FADED7", backgroundColor:style.backgroundColor, flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
