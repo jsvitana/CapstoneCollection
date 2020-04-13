@@ -3,51 +3,83 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import API from "./../API/APICalls.js"
 
-export default function App() {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
+//
+// BIG FLAW IN THIS RIGHT NOW, DOES NOT ASK FOR PERMISSION TO USE CAMERA FIGURE THIS OUT
+//
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
+export default class CamScan extends React.Component {
+  constructor() {
+    super();
 
-  const handleBarCodeScanned = async ({ type, data }) => {
-    setScanned(true);
-    var api = new API();
-    var item = await api.GetBarcodeItem(data);
-    if(item == false) {
-      alert("This is not a UPC we have, please try another.");
-    } 
-    else {
-      alert(item.item_attributes.title);
+    this.state = {
+      scanned: false
+    }
+  }
+
+  ResetScanned() {
+    this.state.scanned = false
+    this.forceUpdate()
+  }
+
+  ScannedButton() {
+    if(this.state.scanned) {
+      return (
+        <Button title={'Tap to Scan Again'} onPress={() => this.ResetScanned()} />
+      )     
+    }  
+  }
+
+  handleBarCodeScanned = async ({ type, data }) => {
+    if(this.state.scanned == false) {
+      // Set scanned to true so it doesnt keep hitting it a millions times
+      this.state.scanned = true;
+
+      //Find item based on data scanner return
+      var api = new API();
+      var item = await api.GetBarcodeItem(data);
+      if(item == false) {
+        alert("This is not a UPC we have, please try another.");
+        this.forceUpdate()
+      } 
+      else {
+        //alert(item.item_attributes.title);
+        this.props.navigation.navigate("Scanner", {item: item, UPCCode: item.item_attributes.upc, fromCamera: true})
+      }
     }
   };
 
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
+  render() { 
+    //const [hasPermission, setHasPermission] = useState(null);
+    //const [scanned, setScanned] = useState(false);
 
-  return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-      }}>
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
+    /*useEffect(() => {
+      (async () => {
+        const { status } = await BarCodeScanner.requestPermissionsAsync();
+        setHasPermission(status === 'granted');
+      })();
+    }, []);*/
 
-      {scanned && (
-        <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />
-      )}
-    </View>
-  );
+    /*if (hasPermission === null) {
+      return <Text>Requesting for camera permission</Text>;
+    }
+    if (hasPermission === false) {
+      return <Text>No access to camera</Text>;
+    }*/
+
+    return (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+        }}>
+        <BarCodeScanner
+          onBarCodeScanned={this.handleBarCodeScanned}
+          style={StyleSheet.absoluteFillObject}
+        />
+
+        {this.ScannedButton()}                
+      </View>
+    );
+  }
 }

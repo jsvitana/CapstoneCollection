@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, TabBarIOS } from 'react-native';
 import Home from "./components/Home";
 import Scanner from "./components/Scanner";
 import CamScan from "./components/CamScan";
@@ -16,8 +15,8 @@ export default class App extends React.Component {
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen name="Home" component={Home} />
-          <Tab.Screen name="Scanner" component={Scanner} />
-          <Tab.Screen name="CamScan" component={CamScan} />
+          <Tab.Screen name="Scanner" component={Scanner} options={{unmountOnBlur: true}}/>
+          <Tab.Screen name="CamScan" component={CamScan}  options={{unmountOnBlur: true}} />
         </Tab.Navigator>
       </NavigationContainer>
     );
