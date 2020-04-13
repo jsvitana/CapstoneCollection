@@ -1,5 +1,6 @@
 import React from "react";
 import {View,Text, Button, TextInput, StyleSheet} from "react-native"; 
+import style from "./../styles/styles.json" 
 import API from "./../API/APICalls.js"
 import CamScan from "./CamScan"
 import { NavigationContainer } from "@react-navigation/native";
@@ -65,7 +66,7 @@ export default class Scanner extends React.Component {
 
     render() {
         return(
-            <View style={styles.container}>
+            <View style={{color: "#FADED7", backgroundColor:style.backgroundColor, flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
                 <View style={styles.manualEntry}>
                     <Text>Manual Barcode Entry</Text>
                     <TextInput style={styles.textInput} placeholder = "UPC Code..." value={this.state.UPCCode} onChangeText = {this.handleText} />
