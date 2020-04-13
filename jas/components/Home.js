@@ -1,14 +1,15 @@
 import React from "react";
-import {View,Text} from "react-native";   
-import { styles } from "./style"
+import {View,Text, StyleSheet} from "react-native";   
+import style from "./../styles/styles.json" 
 
 export default class Home extends React.Component {
     render() {
         return(
-            <View style={styles.container}>
-                <Text style={styles.baseText}>Ready to start collecting?</Text>
-                <Text>test</Text>
-                <Text>test 2</Text>
+            <View style={{color: "#FADED7", backgroundColor:style.backgroundColor, flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
+                <Text style={{color:style.color, fontSize: 30, top:50}}>
+                    <br></br>
+                    Ready to start collecting?
+                </Text>
             </View>
         )
     }

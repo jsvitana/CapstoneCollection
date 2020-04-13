@@ -7,16 +7,16 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 export default class App extends React.Component {
-
   render() {
     
     const Tab = createBottomTabNavigator();
+
     
     return (
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Home" component={Home} />
-          <Tab.Screen name="Collections" component={collections} />
+          <Tab.Screen name="Home" component={Home} options={{unmountOnBlur:true}} />
+          <Tab.Screen name="Collections" component={collections} options={{unmountOnBlur:true}} />
           <Tab.Screen name="Settings" component={settings} />
         </Tab.Navigator>
       </NavigationContainer>
