@@ -3,6 +3,7 @@ import {View,Text, Button, TextInput, StyleSheet} from "react-native";
 import API from "./../API/APICalls.js"
 import CamScan from "./CamScan"
 import { NavigationContainer } from "@react-navigation/native";
+import style from "./../styles/styles.json" 
 
 export default class Scanner extends React.Component {
 
@@ -65,9 +66,9 @@ export default class Scanner extends React.Component {
 
     render() {
         return(
-            <View style={styles.container}>
+            <View  style={{color: "#FADED7", backgroundColor:style.backgroundColor, flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
                 <View style={styles.manualEntry}>
-                    <Text>Manual Barcode Entry</Text>
+                    <Text style={{color:style.color, fontSize: 30, top:50}}>Manual Barcode Entry</Text>
                     <TextInput style={styles.textInput} placeholder = "UPC Code..." value={this.state.UPCCode} onChangeText = {this.handleText} />
                     <Button title="Submit" onPress={() => this.GetItem()} />
                 </View>
@@ -75,7 +76,7 @@ export default class Scanner extends React.Component {
                 {this.UpdateItemText()}
 
                 <View style={styles.cameraEntry} on>
-                    <Text>Use Your Camera</Text>
+                    <Text style={{color:style.color, fontSize: 30, top:50}}>Use Your Camera{"\n\n"}</Text>
                     <Button title="press" onPress={() => this.props.navigation.navigate("CamScan")}/>
                 </View>               
             </View>
