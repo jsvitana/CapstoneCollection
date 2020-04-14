@@ -26,7 +26,6 @@ darkModeSwitch(){
                 <Text style={{color:style.color, fontSize: 30, top:50}}>This is the Settings pages{"\n"}</Text>
                 <TouchableOpacity style={styles.darkModeButton}
                         onPress={()=>this.darkModeSwitch()}
-                        title="Dark Mode"
                         accessibilityLabel="Turns Dark Mode on/off">
                             <Text>Dark Mode</Text>
                         </TouchableOpacity>

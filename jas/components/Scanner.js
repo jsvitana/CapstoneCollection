@@ -1,10 +1,9 @@
 import React from "react";
-import {View,Text, Button, TextInput, StyleSheet} from "react-native"; 
+import {View,Text, Button, TextInput, StyleSheet, TouchableOpacity} from "react-native"; 
 import style from "./../styles/styles.json" 
 import API from "./../API/APICalls.js"
 import CamScan from "./CamScan"
 import { NavigationContainer } from "@react-navigation/native";
-import style from "./../styles/styles.json" 
 
 export default class Scanner extends React.Component {
 
@@ -39,7 +38,7 @@ export default class Scanner extends React.Component {
 
     UpdateItemText() {
         return (
-            <Text>
+            <Text style={{color:style.color, fontSize: 30, top:50}}>
                 {this.state.UPCCode}
                 {"\n\n"}
                 {this.state.title}
@@ -69,9 +68,11 @@ export default class Scanner extends React.Component {
         return(
             <View style={{color: "#FADED7", backgroundColor:style.backgroundColor, flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
                 <View style={styles.manualEntry}>
-                    <Text style={{color:style.color, fontSize: 30, top:50}}>Manual Barcode Entry</Text>
-                    <TextInput style={styles.textInput} placeholder = "UPC Code..." value={this.state.UPCCode} onChangeText = {this.handleText} />
-                    <Button title="Submit" onPress={() => this.GetItem()} />
+                    <Text style={{color:style.color, fontSize: 30, top:50}}>Manual Barcode Entry{"\n"}</Text>
+                    <TextInput style={{color:style.color, fontSize: 30, top:50}} placeholder = "UPC Code..." value={this.state.UPCCode} onChangeText = {this.handleText} />
+                    <TouchableOpacity style={styles.btn} onPress={() => this.GetItem()} >
+                        <Text> Submit </Text>
+                    </TouchableOpacity>
                 </View>
 
                 {this.UpdateItemText()}
@@ -86,11 +87,7 @@ export default class Scanner extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
+
     manualEntry: {
         flex: 1,
         alignItems: 'center',
@@ -106,5 +103,11 @@ const styles = StyleSheet.create({
         height: 30,
         width: 200,
         borderWidth: 1
+    },
+    btn: {
+        justifyContent: 'flex-start',
+        position: "relative",
+        top: 100,
+        backgroundColor: '#BB86FC'
     }
   });
