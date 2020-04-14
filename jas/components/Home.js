@@ -1,20 +1,20 @@
 import React from "react";
-import {View,Text,Button, StyleSheet} from "react-native";   
+import {View,Text, StyleSheet} from "react-native";   
+import style from "./../styles/styles.json" 
+
 
 export default class Home extends React.Component {
+    constructor() {
+        super();
+    }
+
     render() {
         return(
-            <View style={styles.container}>
-                <Text>Does this workdhhhhddkdddd</Text>
+            <View style={{color: "#FADED7", backgroundColor:style.backgroundColor, flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
+                <Text style={{color:style.color, fontSize: 30, top:50}}>
+                    Ready to start collecting?
+                </Text>
             </View>
         )
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-  });
