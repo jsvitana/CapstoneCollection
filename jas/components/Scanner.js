@@ -20,7 +20,7 @@ export default class Scanner extends React.Component {
 
     componentDidMount() {
         try{
-            console.log("hereeeeeee")
+           
             if (this.props.route.params.fromCamera) {
                 this.setState({
                     UPCCode: this.props.route.params.UPCCode.slice(1),
@@ -56,13 +56,25 @@ export default class Scanner extends React.Component {
             alert("This is not a UPC we have, please try another.")
         }       
         else {
+            api.PostItem(item);
             alert(item.item_attributes.title); 
         }  
     }
 
+    async GetAllItems() {
+        var api = new API();
+        var item = await api.GetItems(); 
+        console.log(item);
+
+    }
+
+
+
+
     handleText = (text) => {
         this.setState({UPCCode: text})
     }
+
 
     render() {
         return(
@@ -73,6 +85,15 @@ export default class Scanner extends React.Component {
                     <TouchableOpacity style={styles.btn} onPress={() => this.GetItem()} >
                         <Text> Submit </Text>
                     </TouchableOpacity>
+
+
+                    <TouchableOpacity style={styles.btn} onPress={() => this.GetAllItems()} >
+                        <Text> Test </Text>
+                    </TouchableOpacity>
+
+
+
+                    
                 </View>
 
                 {this.UpdateItemText()}
