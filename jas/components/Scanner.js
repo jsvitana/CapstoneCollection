@@ -60,9 +60,21 @@ export default class Scanner extends React.Component {
         }  
     }
 
+    async GetAllItems() {
+        var api = new API();
+        var item = api.GetItems(); 
+        console.log(item);
+        console.log("success"); 
+
+    }
+
+
+
+
     handleText = (text) => {
         this.setState({UPCCode: text})
     }
+
 
     render() {
         return(
@@ -73,6 +85,15 @@ export default class Scanner extends React.Component {
                     <TouchableOpacity style={styles.btn} onPress={() => this.GetItem()} >
                         <Text> Submit </Text>
                     </TouchableOpacity>
+
+
+                    <TouchableOpacity style={styles.btn} onPress={() => this.GetAllItems()} >
+                        <Text> Test </Text>
+                    </TouchableOpacity>
+
+
+
+                    
                 </View>
 
                 {this.UpdateItemText()}

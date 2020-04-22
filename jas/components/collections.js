@@ -1,8 +1,18 @@
 import React from "react";
 import {View,Text, StyleSheet} from "react-native";   
 import style from "./../styles/styles.json"
+import API from "./../API/APICalls.js"
+import { getLightEstimationEnabled } from "expo/build/AR";
 
 export default class test extends React.Component {
+ 
+
+
+ 
+
+
+
+
     render() {
         return(
             <View style={{backgroundColor:style.backgroundColor, flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
