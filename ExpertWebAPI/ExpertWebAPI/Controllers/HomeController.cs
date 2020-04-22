@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ExpertWebAPI.Models;
+using ExpertWebAPI.Services;
 
 namespace ExpertWebAPI.Controllers
 {
@@ -11,6 +13,11 @@ namespace ExpertWebAPI.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
+
+            using(var DB = new collectorEntities())
+            {
+                ViewBag.Items = ItemService.GetItems(DB);
+            }
 
             return View();
         }
