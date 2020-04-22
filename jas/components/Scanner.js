@@ -20,7 +20,7 @@ export default class Scanner extends React.Component {
 
     componentDidMount() {
         try{
-            console.log("hereeeeeee")
+           
             if (this.props.route.params.fromCamera) {
                 this.setState({
                     UPCCode: this.props.route.params.UPCCode.slice(1),
@@ -62,9 +62,8 @@ export default class Scanner extends React.Component {
 
     async GetAllItems() {
         var api = new API();
-        var item = api.GetItems(); 
+        var item = await api.GetItems(); 
         console.log(item);
-        console.log("success"); 
 
     }
 

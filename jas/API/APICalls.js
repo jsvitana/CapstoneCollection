@@ -25,19 +25,13 @@ class API {
 
     GetItems() {
         return new Promise(function (resolve,reject) {
-            let url = "https://xpertcollector.azurewebsites.net/api/api/getitems"
+            let url = "https://expertcollector.azurewebsites.net/api/api/getitems"
             let item
 
             fetch(url)
             .then(response => response.json())
             .then((response) => {
                 console.log(response.item_response)
-                if(response.item_response.code == 200) {
-                    item = response
-                }
-                else {
-                    item = false
-                }
                 resolve(item);
             })
         });
