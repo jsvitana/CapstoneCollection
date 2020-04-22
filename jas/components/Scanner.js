@@ -56,6 +56,7 @@ export default class Scanner extends React.Component {
             alert("This is not a UPC we have, please try another.")
         }       
         else {
+            api.PostItem(item);
             alert(item.item_attributes.title); 
         }  
     }
