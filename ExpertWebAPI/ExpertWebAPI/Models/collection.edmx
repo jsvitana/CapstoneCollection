@@ -48,7 +48,7 @@
           <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="collectorEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="collectorEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CollectionItems" EntityType="Self.CollectionItem" />
           <EntitySet Name="Users" EntityType="Self.User" />
         </EntityContainer>
@@ -57,7 +57,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="collectorModelStoreContainer" CdmEntityContainer="collectorEntities">
+        <EntityContainerMapping StorageEntityContainer="collectorModelStoreContainer" CdmEntityContainer="collectorEntities1">
           <EntitySetMapping Name="CollectionItems">
             <EntityTypeMapping TypeName="collectorModel.CollectionItem">
               <MappingFragment StoreEntitySet="CollectionItems">

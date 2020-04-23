@@ -14,7 +14,7 @@ namespace ExpertWebAPI.Controllers
         {
             ViewBag.Title = "Home Page";
 
-            using(var DB = new collectorEntities())
+            using(var DB = new collectorEntities1())
             {
                 ViewBag.Items = ItemService.GetItems(DB);
             }

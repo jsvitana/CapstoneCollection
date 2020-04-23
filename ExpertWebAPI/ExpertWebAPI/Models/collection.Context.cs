@@ -13,10 +13,10 @@ namespace ExpertWebAPI.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class collectorEntities : DbContext
+    public partial class collectorEntities1 : DbContext
     {
-        public collectorEntities()
-            : base("name=collectorEntities")
+        public collectorEntities1()
+            : base("name=collectorEntities1")
         {
         }
     

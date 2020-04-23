@@ -21,7 +21,7 @@ namespace ExpertWebAPI.Controllers
         {
             List<CollectionItem> allItems = new List<CollectionItem>();
 
-            using (var DB = new collectorEntities())
+            using (var DB = new collectorEntities1())
             {
                 allItems = ItemService.GetItems(DB);
             }
@@ -34,7 +34,7 @@ namespace ExpertWebAPI.Controllers
         public IHttpActionResult PostItem([FromBody] dynamic jsonObject )
         {
 
-            using (var DB = new collectorEntities())
+            using (var DB = new collectorEntities1())
             {
                 ItemService.PostItem(DB,jsonObject);
             }
