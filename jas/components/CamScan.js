@@ -41,8 +41,9 @@ export default class CamScan extends React.Component {
         alert("This is not a UPC we have, please try another.");
         this.forceUpdate()
       } 
-      else {
+      else { 
         //alert(item.item_attributes.title);
+        api.PostItem(item);
         this.props.navigation.navigate("Scanner", {item: item, UPCCode: item.item_attributes.upc, fromCamera: true})
       }
     }
