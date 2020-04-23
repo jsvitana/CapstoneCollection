@@ -1,10 +1,26 @@
-﻿@foreach(var item in ViewBag.Items)
-{
-    <div>@item.ItemName</div>
-}
+﻿
+<table id="jqueryDataTable" class="table table-bordered table-hover table-dark">
+    <thead>
+        <tr>
+            <th>Item Name</th>
+            <th>UPC Code</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.Items)
+        {
+            <tr>
+                <td>@item.ItemName</td>
+                <td>@item.UPC</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 @section scripts {
     <script>
-        
+        $(document).ready( function () {
+            $('#jqueryDataTable').DataTable();
+        });
     </script>
     }

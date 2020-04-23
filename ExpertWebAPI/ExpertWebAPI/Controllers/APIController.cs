@@ -14,6 +14,22 @@ namespace ExpertWebAPI.Controllers
     [EnableCors(origins: "https://expertcollector.azurewebsites.net", headers: "*", methods: "*")]
     public class APIController : ApiController
     {
+        [HttpGet]
+        [ActionName("login")]
+        public IHttpActionResult GetLogin(string username, string password)
+        {
+            User user = new User();
+            bool validLogin = false;
+
+            using (var DB = new collectorEntities1())
+            {
+                user = UserService.GetUser(DB, username);
+                validLogin = UserService.VerifyLogin(DB, password, user);
+            }
+
+            return Json(new { login = validLogin });
+        }
+
         // /api/api/GetItems
         [HttpGet]
         [ActionName("GetItems")]
