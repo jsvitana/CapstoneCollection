@@ -25,7 +25,7 @@ class API {
 
     GetItems() {
         return new Promise(function (resolve,reject) {
-            let url = "https://expertcollector.azurewebsites.net/api/api/getitems"
+            let url = "https://xpertcollector.azurewebsites.net/api/api/getitems"
             let item
 
             fetch(url)
@@ -40,7 +40,7 @@ class API {
 
     PostItem(item) {
         console.log(item)
-        let url = "https://expertcollector.azurewebsites.net/api/api/postitem"
+        let url = "https://xpertcollector.azurewebsites.net/api/api/postitem"
         let body = JSON.stringify({
             itemName: item.item_attributes.title,
             upcCode: item.item_attributes.upc
