@@ -6,28 +6,22 @@ import { getLightEstimationEnabled } from "expo/build/AR";
 
 export default class test extends React.Component {
 
-
-
     constructor() {
         super();
     
-        this.state = {
-          
+        this.state = {         
             dataSource: [],
             loading: true
         }
       }
 
-
     async componentDidMount() {
         var api = new API();
         var item = await api.GetItems(); 
-        console.log(item);
         
         this.setState({
-            dataSource: item,
+            dataSource: item.item,
             loading: false
-
         })
         
     }
@@ -43,12 +37,16 @@ export default class test extends React.Component {
         );
     }
 
-    renderItem=(data)=>
-    
-    <TouchableOpacity style={styles.list}>
-    <Text>{data.item.ItemName}</Text>
-    <Text>{data.item.UPC}</Text>
-    </TouchableOpacity>
+    renderItem = (data) => {
+        return(
+            <TouchableOpacity style={styles.list}>
+            <Text>{data.ItemName}</Text>
+            <Text>{data.UPC}</Text>
+            </TouchableOpacity>
+        )
+    }
+
+
     render() {
         if(this.state.loading){
             return(
@@ -59,19 +57,15 @@ export default class test extends React.Component {
         }
 
         return(
-            <View style={styles.container}>
+            <View style={{color: "#FADED7", backgroundColor:style.backgroundColor, flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
                 <FlatList
-
-                    data= {this.state.dataSource}
+                    data={this.state.dataSource}
                     ItemSeparatorComponent = {this.FlatListItemSeperator}
-                    renderItem= {item=> this.renderItem(item)}
-                    keyExtractor= {item=>item.id.toString()}
-
+                    renderItem={({ item }) => this.renderItem(item)}
+                    keyExtractor= {item=>item.ID.toString()}
                 />
-
             </View>
         )
-
     } 
 }
 
