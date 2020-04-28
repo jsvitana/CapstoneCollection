@@ -1,6 +1,16 @@
 import key from  "./../APIKeys.json";  
 
 class API {
+    Login(userName, password) {
+        return new Promise(function (resolve,reject) {
+            //let url = "https://api.barcodespider.com/v1/lookup?token=" + key.barcodeSpider + "&upc=" + UPCCode
+            console.log(userName) 
+            console.log(password)
+            resolve(true)
+        })
+    }
+
+
     GetBarcodeItem(UPCCode) {
         return new Promise(function (resolve,reject) {
             let url = "https://api.barcodespider.com/v1/lookup?token=" + key.barcodeSpider + "&upc=" + UPCCode
