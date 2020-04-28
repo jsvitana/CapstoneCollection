@@ -39,10 +39,12 @@ export default class test extends React.Component {
 
     renderItem = (data) => {
         return(
+            <View style={styles.container}>
             <TouchableOpacity style={styles.list}>
-            <Text>{data.ItemName}</Text>
-            <Text>{data.UPC}</Text>
+            <Text style={styles.text}>Item Name: {data.ItemName}</Text>
+            <Text style={styles.text}>UPC Code: {data.UPC}</Text>
             </TouchableOpacity>
+            </View>
         )
     }
 
@@ -72,7 +74,9 @@ export default class test extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#fff"
+      top:50,
+      
+      justifyContent:"center"
      },
     loader:{
       flex: 1,
@@ -83,6 +87,10 @@ const styles = StyleSheet.create({
     list:{
       paddingVertical: 4,
       margin: 5,
-      backgroundColor: "#fff"
+      backgroundColor: "#101820FF"
+     },
+     text:{
+        fontSize: 18,
+        color:"#fff"
      }
   });
