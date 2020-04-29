@@ -26,5 +26,10 @@ namespace ExpertWebAPI.Services
             DB.CollectionItems.Add(item);
             DB.SaveChanges();
         }
+
+        public static List<CollectionItem> GetUserItems(collectorEntities1 DB, int userID)
+        {
+            return DB.CollectionItems.Where(i => i.UserID == userID).ToList();
+        }
     }
 }

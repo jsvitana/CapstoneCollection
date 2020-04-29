@@ -11,7 +11,7 @@ using ExpertWebAPI.Services;
 
 namespace ExpertWebAPI.Controllers
 {
-    [EnableCors(origins: "https://expertcollector.azurewebsites.net", headers: "*", methods: "*")]
+    [EnableCors(origins: "https://xpertcollector.azurewebsites.net", headers: "*", methods: "*")]
     public class APIController : ApiController
     {
         [HttpGet]
@@ -27,7 +27,14 @@ namespace ExpertWebAPI.Controllers
                 validLogin = UserService.VerifyLogin(DB, password, user);
             }
 
-            return Json(new { login = validLogin });
+            if (validLogin)
+            {
+                return Json(new { login = validLogin, userID = user.ID, username = user.Username, userDisplayName = user.DisplayName });
+            }
+            else
+            {
+                return Json(new { login = validLogin });
+            }
         }
 
         // /api/api/GetItems
@@ -43,6 +50,20 @@ namespace ExpertWebAPI.Controllers
             }
 
             return Json(new { item = allItems });
+        }
+
+        [HttpGet]
+        [ActionName("GetUserItems")]
+        public IHttpActionResult GetUserItems(int userID)
+        {
+            List<CollectionItem> userItems = new List<CollectionItem>();
+
+            using(var DB = new collectorEntities1())
+            {
+                userItems = ItemService.GetUserItems(DB, userID);
+            }
+
+            return Json(new { userItems });
         }
 
         [HttpPost]
