@@ -17,5 +17,6 @@ namespace ExpertWebAPI.Models
         public int ID { get; set; }
         public string ItemName { get; set; }
         public string UPC { get; set; }
+        public Nullable<int> UserID { get; set; }
     }
 }
