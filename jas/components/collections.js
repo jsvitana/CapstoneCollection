@@ -17,10 +17,10 @@ export default class test extends React.Component {
 
     async componentDidMount() {
         var api = new API();
-        var item = await api.GetItems(); 
+        var item = await api.GetUserItems(); 
         
         this.setState({
-            dataSource: item.item,
+            dataSource: item.userItems,
             loading: false
         })
         

@@ -22,6 +22,7 @@ namespace ExpertWebAPI.Services
 
             item.ItemName = jsonItem.itemName;
             item.UPC = jsonItem.upcCode;
+            item.UserID = jsonItem.userID;
 
             DB.CollectionItems.Add(item);
             DB.SaveChanges();
