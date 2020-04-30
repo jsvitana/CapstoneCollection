@@ -35,7 +35,7 @@ darkModeSwitch(){
         )
     }
 }
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
     darkModeButton: {
         top:100,
         position: "relative",
