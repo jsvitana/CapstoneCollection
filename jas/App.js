@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View,Text, Button, TextInput, StyleSheet, TouchableOpacity} from "react-native"; 
+import {View,Text, Button, TextInput, StyleSheet, TouchableOpacity, Image} from "react-native"; 
 import API from "./API/APICalls.js"
 import Home from "./components/Home";
 import Scanner from "./components/Scanner";
@@ -50,29 +50,60 @@ export default class App extends React.Component {
     }
     else {
       return (
-        <View style={{color: "#FADED7", backgroundColor:"gray", flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
-          <Text style={{color:style.color, fontSize: 30, top:50}}>Login</Text>
+        <View style={{backgroundColor: 'black', flex: 1}}>
+          <View style={styles.loginContainer}>
+            <Text style={{color:style.color, fontSize: 20, top:200}}>Login to start collecting!</Text>
+            <Image source={require("./assets/LogoTransparent.png")} />
 
-          <View style={{margin: 100}}>
-            <TextInput
-              style={{backgroundColor: "white", width: 200, height:25}}
-              placeholder="Username"
-              placeholderTextColor="black"
-              onChangeText = {(text) => this.setState({userName: text})}
-            />
-            <TextInput
-              style={{backgroundColor: "white", width: 200, height:25, top:20}}
-              placeholder="Password"
-              placeholderTextColor="black"
-              secureTextEntry
-              onChangeText = {(text) => this.setState({password: text})}
-            />
-            <TouchableOpacity style={{top:100}} title="login" onPress={() => {this.validateLogin();}}>
-              <Text>Login</Text>
-            </TouchableOpacity>
+            <View style={{margin: 50}}>
+              <TextInput
+                style={{backgroundColor: "white", width: 200, height:35, borderRadius: 7}}
+                placeholder="Username"
+                placeholderTextColor="grey"
+                onChangeText = {(text) => this.setState({userName: text})}
+              />
+              <TextInput
+                style={{backgroundColor: "white", width: 200, height:35, top:20, borderRadius: 7}}
+                placeholder="Password"
+                placeholderTextColor="grey"
+                secureTextEntry
+                onChangeText = {(text) => this.setState({password: text})}
+              />
+              <TouchableOpacity style={styles.loginButton} title="login" onPress={() => {this.validateLogin();}}>
+                <Text style={styles.loginButtonText}>Login</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       );
     } 
   }
 }
+
+const styles = StyleSheet.create({
+
+  loginContainer: {
+    color: "#FADED7",
+    backgroundColor:"#4254f5",
+    flex:1 , alignItems:"center",
+    justifyContent: 'flex-start',
+    margin: 40,
+    borderRadius: 30
+  },
+  loginHeader: {
+    color:style.color,
+    fontSize: 30,
+    top:100
+  },
+  loginButton: {
+    top: 75,
+    height: 40,
+    textAlign: 'center'
+  },
+  loginButtonText: {
+    color: '#03e3fc',
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: '500'
+  }
+});
