@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View,Text, Button, TextInput, StyleSheet, TouchableOpacity, Image} from "react-native"; 
+import {View,Text, Button, TextInput, StyleSheet, TouchableOpacity, Image, Linking} from "react-native"; 
 import API from "./API/APICalls.js"
 import Home from "./components/Home";
 import Scanner from "./components/Scanner";
@@ -10,7 +10,7 @@ import style from "./styles/styles.json"
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from 'react-navigation-stack';
+import {createStackNavigator} from 'react-navigation-stack';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -31,8 +31,11 @@ export default class App extends React.Component {
     console.log(this.state.login)
   }
 
-  render() {
+  registerUser() {
+    Linking.openURL('https://xpertcollector.azurewebsites.net/').catch(err => console.error("Couldn't load page", err));
+  }
 
+  render() {
     if(this.state.login == true) {
       const Tab = createBottomTabNavigator();
 
@@ -73,6 +76,11 @@ export default class App extends React.Component {
                 <Text style={styles.loginButtonText}>Login</Text>
               </TouchableOpacity>
             </View>
+            <View style={styles.registerAccountButton}>
+              <TouchableOpacity onPress={() => this.registerUser()}>
+                <Text style={styles.registerAccountText}>Register For An Account!</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       );
@@ -105,5 +113,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
     fontWeight: '500'
+  },
+  registerAccountButton: {
+    margin: 100,
+    width: 250
+  },
+  registerAccountText: {
+    fontSize: 20,
+    color: '#03e3fc',
+    textAlign: 'center'
   }
 });
