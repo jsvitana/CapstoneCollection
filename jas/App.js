@@ -32,7 +32,7 @@ export default class App extends React.Component {
   }
 
   registerUser() {
-    Linking.openURL('https://xpertcollector.azurewebsites.net/').catch(err => console.error("Couldn't load page", err));
+    Linking.openURL('https://xpertcollector.azurewebsites.net/Login/Register').catch(err => console.error("Couldn't load page", err));
   }
 
   render() {
@@ -61,7 +61,7 @@ export default class App extends React.Component {
             <View style={{margin: 50}}>
               <TextInput
                 style={{backgroundColor: "white", width: 200, height:35, borderRadius: 7}}
-                placeholder="Username"
+                placeholder="Email"
                 placeholderTextColor="grey"
                 onChangeText = {(text) => this.setState({userName: text})}
               />
