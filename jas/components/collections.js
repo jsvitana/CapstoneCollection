@@ -3,6 +3,7 @@ import {View,Text, StyleSheet, FlatList, TouchableOpacity, ActivityIndicator} fr
 import style from "./../styles/styles.json"
 import API from "./../API/APICalls.js"
 import { getLightEstimationEnabled } from "expo/build/AR";
+import { SearchBar } from "react-native-elements";
 
 export default class test extends React.Component {
 
@@ -11,19 +12,38 @@ export default class test extends React.Component {
     
         this.state = {         
             dataSource: [],
-            loading: true
+            loading: true,
+            refreshing: false
         }
       }
 
-    async componentDidMount() {
+    componentDidMount() {
+       this.makeRequest();
+        
+    }
+
+
+    async makeRequest(){
         var api = new API();
         var item = await api.GetItems(); 
         
         this.setState({
             dataSource: item.item,
-            loading: false
+            loading: false,
+            refreshing: false
         })
-        
+    }
+
+    handleRefresh = () => {
+        this.setState(
+            {
+                refreshing: true
+            },
+            () => {
+                this.makeRequest();
+            }
+        );
+      
     }
 
     FlatListItemSeperator = () => {
@@ -48,6 +68,26 @@ export default class test extends React.Component {
         )
     }
 
+    renderHeader = () => {
+        return <SearchBar placeholder="Type Here..." lightTheme round />;
+    };
+
+    renderFooter = () => {
+        if (!this.state.loading) return null;
+
+        return(
+            <View
+                style={{
+                    paddingVertical: 20,
+                    
+                }}
+                >
+                    <ActivityIndicator animating size = "large"/>
+                </View>
+        )
+    }
+
+
 
     render() {
         if(this.state.loading){
@@ -63,8 +103,12 @@ export default class test extends React.Component {
                 <FlatList
                     data={this.state.dataSource}
                     ItemSeparatorComponent = {this.FlatListItemSeperator}
+                    ListHeaderComponent = {this.renderHeader}
+                    ListFooterComponent = {this.renderFooter}
                     renderItem={({ item }) => this.renderItem(item)}
                     keyExtractor= {item=>item.ID.toString()}
+                    refreshing = {this.state.refreshing}
+                    onRefresh = {this.handleRefresh}
                 />
             </View>
         )
