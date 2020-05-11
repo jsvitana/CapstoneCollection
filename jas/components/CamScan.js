@@ -3,17 +3,23 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import API from "./../API/APICalls.js"
 
-//
-// BIG FLAW IN THIS RIGHT NOW, DOES NOT ASK FOR PERMISSION TO USE CAMERA FIGURE THIS OUT
-//
-
 export default class CamScan extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      scanned: false
+      scanned: false,
+      hasPermission: null,
+      setHasPermission: null
     }
+  }
+
+  async componentDidMount() {
+    const status = await BarCodeScanner.requestPermissionsAsync();
+    this.setState({
+      hasPermission: status.granted
+    })
+    console.log(this.state.hasPermission)
   }
 
   ResetScanned() {
@@ -50,30 +56,17 @@ export default class CamScan extends React.Component {
   };
 
   render() { 
-    //const [hasPermission, setHasPermission] = useState(null);
-    //const [scanned, setScanned] = useState(false);
-
-    /*useEffect(() => {
-      (async () => {
-        const { status } = await BarCodeScanner.requestPermissionsAsync();
-        setHasPermission(status === 'granted');
-      })();
-    }, []);*/
-
-    /*if (hasPermission === null) {
-      return <Text>Requesting for camera permission</Text>;
+    if (this.state.hasPermission === null) {
+      console.log(this.state.hasPermission)
+      return <View style={{flex: 1, flexDirection: 'column', justifyContent: 'flex-end',alignItems:"center",color:"white", backgroundColor: "black"}}><Text>Requesting for camera permission</Text></View>;
     }
-    if (hasPermission === false) {
-      return <Text>No access to camera</Text>;
-    }*/
+    if (this.state.hasPermission === false) {
+      return <View style={{flex: 1, flexDirection: 'column', justifyContent: 'flex-end',alignItems:"center",color:"white", backgroundColor: "black"}}><Text>No access to camera</Text></View>;
+    }
 
     return (
       <View
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-        }}>
+        style={{flex: 1, flexDirection: 'column', justifyContent: 'flex-end'}}>
         <BarCodeScanner
           onBarCodeScanned={this.handleBarCodeScanned}
           style={StyleSheet.absoluteFillObject}
