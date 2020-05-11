@@ -29,7 +29,8 @@ export default class test extends React.Component {
         
         this.setState({
             dataSource: item.userItems,
-            loading: false
+            loading: false,
+            refreshing: false
         })
     }
 
@@ -118,6 +119,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       top:50,
+      
       
       justifyContent:"center"
      },
