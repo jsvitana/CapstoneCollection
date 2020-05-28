@@ -27,5 +27,6 @@ namespace ExpertWebAPI.Models
     
         public virtual DbSet<CollectionItem> CollectionItems { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<BarcodeItem> BarcodeItems { get; set; }
     }
 }

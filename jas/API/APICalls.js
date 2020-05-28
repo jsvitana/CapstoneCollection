@@ -26,23 +26,34 @@ class API {
 
     GetBarcodeItem(UPCCode) {
         return new Promise(function (resolve,reject) {
+            let collectorURL = "https://xpertcollector.azurewebsites.net/api/api/GetBarcodeItem?barcode=" + UPCCode
             let url = "https://api.barcodespider.com/v1/lookup?token=" + key.barcodeSpider + "&upc=" + UPCCode
             let item
 
-            fetch(url)
+            fetch(collectorURL)
             .then(response => response.json())
             .then((response) => {
-                //console.log(response.item_response)
-                if(response.item_response.code == 200) {
+                if(response.success == true) {
                     item = response
+                    console.log(item);
+                    resolve(item);
                 }
                 else {
-                    item = false
+                    fetch(url)
+                    .then(response => response.json())
+                    .then((response) => {
+                        //console.log(response.item_response)
+                        if(response.item_response.code == 200) {
+                            item = response
+                        }
+                        else {
+                            item = false
+                        }
+                        resolve(item);
+                    })
                 }
-                resolve(item);
             })
-        });
-        
+        });      
     }
 
 
@@ -89,6 +100,31 @@ class API {
             "Content-Type": "application/json"
         }
 
+        fetch(url, {
+            method: "POST",
+            headers: headers,
+            body: body,
+            timeout: 500
+        })
+    }
+
+    PostNewBarcodeItem(item) {
+        let url = "https://xpertcollector.azurewebsites.net/api/api/PostBarcode"
+        let body = JSON.stringify({
+            title: item.item_attributes.title,
+            upc: item.item_attributes.upc,
+            ean: item.item_attributes.ean,
+            category: item.item_attributes.category,
+            brand: item.item_attributes.brand,
+            model: item.item_attributes.model,
+            manufacturer: item.item_attributes.manufacturer,
+            description: item.item_attributes.description,
+            userID: userData.userID
+        })
+        const headers = {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        }
         fetch(url, {
             method: "POST",
             headers: headers,

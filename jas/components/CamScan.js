@@ -48,7 +48,9 @@ export default class CamScan extends React.Component {
         this.forceUpdate()
       } 
       else { 
-        //alert(item.item_attributes.title);
+        if(item.item_response.message == "Data returned") {
+          api.PostNewBarcodeItem(item); 
+        }
         api.PostItem(item);
         this.props.navigation.navigate("Scanner", {item: item, UPCCode: item.item_attributes.upc, fromCamera: true})
       }

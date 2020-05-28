@@ -7,6 +7,7 @@
       <Diagram DiagramId="b9dca73cafe346cfa44c8722143baedc" Name="Diagram1">
         <EntityTypeShape EntityType="collectorModel.CollectionItem" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="collectorModel.User" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="collectorModel.BarcodeItem" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

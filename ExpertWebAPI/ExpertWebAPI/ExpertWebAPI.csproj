@@ -178,6 +178,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BarcodeItem.cs">
+      <DependentUpon>collection.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\collection.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

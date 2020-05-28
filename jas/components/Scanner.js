@@ -56,6 +56,9 @@ export default class Scanner extends React.Component {
             alert("This is not a UPC we have, please try another.")
         }       
         else {
+            if(item.item_response.message == "Data returned") {
+                api.PostNewBarcodeItem(item); 
+            }
             api.PostItem(item);
             alert(item.item_attributes.title); 
         }  

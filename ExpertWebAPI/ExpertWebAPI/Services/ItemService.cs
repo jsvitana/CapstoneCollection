@@ -32,5 +32,28 @@ namespace ExpertWebAPI.Services
         {
             return DB.CollectionItems.Where(i => i.UserID == userID).ToList();
         }
+
+        public static void PostBarcodeItem(collectorEntities1 DB, dynamic jsonItem)   // Needs checked because barcodes add a 13 char
+        {
+            BarcodeItem item = new BarcodeItem()
+            {
+                Upc = jsonItem.upc,
+                Ean = jsonItem.ean,
+                Category = jsonItem.category,
+                Brand = jsonItem.brand,
+                Model = jsonItem.model,
+                Manufacturer = jsonItem.manufacturer,
+                Description = jsonItem.description,
+                Title = jsonItem.title
+            };
+
+            DB.BarcodeItems.Add(item);
+            DB.SaveChanges();
+        }
+
+        public static BarcodeItem GetBarcodeItem(collectorEntities1 DB, string barcode)
+        {
+            return DB.BarcodeItems.Where(b => b.Upc == barcode).FirstOrDefault();
+        }
     }
 }

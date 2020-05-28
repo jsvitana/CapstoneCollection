@@ -5,6 +5,20 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="collectorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BarcodeItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Upc" Type="nvarchar" MaxLength="20" />
+          <Property Name="Ean" Type="nvarchar" MaxLength="20" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manufacturer" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="CollectionItems">
           <Key>
             <PropertyRef Name="ID" />
@@ -24,6 +38,7 @@
           <Property Name="Password" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="collectorModelStoreContainer">
+          <EntitySet Name="BarcodeItems" EntityType="Self.BarcodeItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CollectionItems" EntityType="Self.CollectionItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -52,7 +67,22 @@
         <EntityContainer Name="collectorEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CollectionItems" EntityType="Self.CollectionItem" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="BarcodeItems" EntityType="collectorModel.BarcodeItem" />
         </EntityContainer>
+        <EntityType Name="BarcodeItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Upc" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Ean" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -76,6 +106,21 @@
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BarcodeItems">
+            <EntityTypeMapping TypeName="collectorModel.BarcodeItem">
+              <MappingFragment StoreEntitySet="BarcodeItems">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Ean" ColumnName="Ean" />
+                <ScalarProperty Name="Upc" ColumnName="Upc" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
