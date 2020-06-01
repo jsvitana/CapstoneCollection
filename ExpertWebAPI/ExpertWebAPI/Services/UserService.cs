@@ -10,7 +10,7 @@ namespace ExpertWebAPI.Services
 {
     public class UserService
     {
-        public static User GetUser(collectorEntities1 DB,string userName)
+        public static User GetUser(collectorEntities1 DB, string userName)
         {
             return DB.Users.Where(u => u.Username == userName).FirstOrDefault();
         }
@@ -18,7 +18,7 @@ namespace ExpertWebAPI.Services
         public static bool VerifyLogin(collectorEntities1 DB, string password, User user)
         {
             password = Utils.sha256(password + user.ID);
-            if(password == user.Password)
+            if (password == user.Password)
             {
                 return true;
             }
@@ -26,6 +26,29 @@ namespace ExpertWebAPI.Services
             {
                 return false;
             }
+        }
+
+        public static void CreateUser(collectorEntities1 DB,string username, string password, string displayName)
+        {
+            User user = new User()
+            {
+                Username = username,
+                DisplayName = displayName
+            };
+
+            DB.Users.Add(user);
+
+            DB.SaveChanges();
+
+            SetPassword(DB, password);
+        }
+        
+        public static void SetPassword(collectorEntities1 DB, string password)
+        {
+            var user = DB.Users.OrderByDescending(u => u.ID).FirstOrDefault();
+            password = Utils.sha256(password + user.ID);
+            user.Password = password;
+            DB.SaveChanges();
         }
     }
 }
