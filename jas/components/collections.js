@@ -68,24 +68,6 @@ export default class test extends React.Component {
         )
     }
 
-    renderHeader = () => {
-        return <SearchBar placeholder="Type Here..." lightTheme round />;
-    };
-
-    renderFooter = () => {
-        if (!this.state.loading) return null;
-
-        return(
-            <View
-                style={{
-                    paddingVertical: 20,
-                    
-                }}
-                >
-                    <ActivityIndicator animating size = "large"/>
-                </View>
-        )
-    }
 
 
 
@@ -103,8 +85,6 @@ export default class test extends React.Component {
                 <FlatList
                     data={this.state.dataSource}
                     ItemSeparatorComponent = {this.FlatListItemSeperator}
-                    ListHeaderComponent = {this.renderHeader}
-                    ListFooterComponent = {this.renderFooter}
                     renderItem={({ item }) => this.renderItem(item)}
                     keyExtractor= {item=>item.ID.toString()}
                     refreshing = {this.state.refreshing}
