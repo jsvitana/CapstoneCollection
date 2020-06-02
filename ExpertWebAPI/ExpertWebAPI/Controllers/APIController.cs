@@ -71,10 +71,17 @@ namespace ExpertWebAPI.Controllers
         [ActionName("PostItem")]
         public IHttpActionResult PostItem([FromBody] dynamic jsonObject )
         {
-
             using (var DB = new collectorEntities1())
             {
-                ItemService.PostItem(DB,jsonObject);
+                var item = ItemService.GetItemByBarcodeAndUser(DB, jsonObject.upcCode.ToString(), (int)jsonObject.userID);
+                if (item == null)
+                {
+                    ItemService.PostItem(DB, jsonObject);
+                }
+                else
+                {
+                    return Json(new { success = false });
+                }
             }
             return Json(new { success = true });
         }

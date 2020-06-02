@@ -55,5 +55,11 @@ namespace ExpertWebAPI.Services
         {
             return DB.BarcodeItems.Where(b => b.Upc == barcode).FirstOrDefault();
         }
+
+        public static CollectionItem GetItemByBarcodeAndUser(collectorEntities1 DB, string barcode, int userID)
+        {
+            var userItems = DB.CollectionItems.Where(i => i.UserID == userID).ToList();
+            return userItems.Where(b => b.UPC == barcode).FirstOrDefault();
+        }
     }
 }
