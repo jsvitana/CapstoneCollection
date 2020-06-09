@@ -19,8 +19,7 @@ export default class Scanner extends React.Component {
     }
 
     componentDidMount() {
-        try{
-           
+        try{          
             if (this.props.route.params.fromCamera) {
                 this.setState({
                     UPCCode: this.props.route.params.UPCCode.slice(1),
@@ -28,12 +27,9 @@ export default class Scanner extends React.Component {
                 })
                 this.props.route.params.fromCamera = false
                 this.forceUpdate()
-            }
-            
+            }           
         }
-        catch{
-
-        }
+        catch{ }
     }
 
     UpdateItemText() {
@@ -60,7 +56,8 @@ export default class Scanner extends React.Component {
                 api.PostNewBarcodeItem(item); 
             }
             api.PostItem(item);
-            alert(item.item_attributes.title); 
+            console.log("this is eeree")
+            this.props.navigation.navigate("Scanner", {item: item, UPCCode: item.item_attributes.upc, fromCamera: true})
         }  
     }
 
@@ -68,11 +65,7 @@ export default class Scanner extends React.Component {
         var api = new API();
         var item = await api.GetItems(); 
         console.log(item);
-
     }
-
-
-
 
     handleText = (text) => {
         this.setState({UPCCode: text})
@@ -81,30 +74,26 @@ export default class Scanner extends React.Component {
 
     render() {
         return(
-            <View style={{color: "#FADED7", backgroundColor:style.backgroundColor, flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
-                <View style={styles.manualEntry}>
-                    <Text style={{color:style.color, fontSize: 30, top:50}}>Manual Barcode Entry{"\n"}</Text>
-                    <TextInput style={{color:style.color, fontSize: 30, top:50}} placeholder = "UPC Code..." value={this.state.UPCCode} onChangeText = {this.handleText} />
-                    <TouchableOpacity style={styles.btn} onPress={() => this.GetItem()} >
-                        <Text> Submit </Text>
-                    </TouchableOpacity>
+            <View style={{backgroundColor: 'black', flex:1, margin: 0}}>
+                <View style={styles.styleContainer}>
+                    <View style={{color: "#FADED7", /*backgroundColor:style.backgroundColor,*/ flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
+                        <View style={styles.manualEntry}>
+                            <Text style={{color:style.color, fontSize: 30, top:50}}>Manual Barcode Entry{"\n"}</Text>
+                            <TextInput style={{fontSize: 30, top:50}} placeholder = "UPC Code..." placeholderTextColor="#99abc7" value={this.state.UPCCode} onChangeText = {this.handleText} />
+                            <TouchableOpacity style={styles.btn} onPress={() => this.GetItem()} >
+                                <Text style={{color: 'white', fontSize: 15}}> Submit! </Text>
+                            </TouchableOpacity>                          
+                        </View>
 
+                        {this.UpdateItemText()}
 
-                    <TouchableOpacity style={styles.btn} onPress={() => this.GetAllItems()} >
-                        <Text> Test </Text>
-                    </TouchableOpacity>
-
-
-
-                    
+                        <View style={styles.cameraEntry} on>
+                            <TouchableOpacity style={styles.cameraBtn} onPress={() => this.props.navigation.navigate("CamScan")} >
+                                <Text style={{color: 'white', fontSize: 30}}> Use Your Camera! </Text>
+                            </TouchableOpacity>
+                        </View>               
+                    </View>
                 </View>
-
-                {this.UpdateItemText()}
-
-                <View style={styles.cameraEntry} on>
-                    <Text style={{color:style.color, fontSize: 30, top:50}}>Use Your Camera{"\n\n"}</Text>
-                    <Button title="press" onPress={() => this.props.navigation.navigate("CamScan")}/>
-                </View>               
             </View>
         )
     }
@@ -112,6 +101,14 @@ export default class Scanner extends React.Component {
 
 const styles = StyleSheet.create({
 
+    styleContainer: {
+        color: "#FADED7",
+        backgroundColor:"#4254f5",
+        flex:1 , alignItems:"center",
+        justifyContent: 'flex-start',
+        margin: 40,
+        borderRadius: 30
+    },
     manualEntry: {
         flex: 1,
         alignItems: 'center',
@@ -129,9 +126,22 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     btn: {
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
+        alignItems: 'center',
         position: "relative",
         top: 100,
-        backgroundColor: '#BB86FC'
+        backgroundColor: '#00c2bf',      
+        borderRadius: 15,
+        width: 100,
+        height: 25
+    },
+    cameraBtn: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: "relative",
+        backgroundColor: '#00c2bf',      
+        borderRadius: 25,
+        width: 250,
+        height: 50
     }
   });

@@ -51,7 +51,7 @@ export default class test extends React.Component {
             <View style={{
                 height: .5,
                 width:"100%",
-                backgroundColor:"rgba(0,0,0,0.5)",
+                backgroundColor:"#4254f5",
             }}
             />
         );
@@ -81,26 +81,36 @@ export default class test extends React.Component {
         }
 
         return(
-            <View style={{color: "#FADED7", backgroundColor:style.backgroundColor, flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
-                <FlatList
-                    data={this.state.dataSource}
-                    ItemSeparatorComponent = {this.FlatListItemSeperator}
-                    renderItem={({ item }) => this.renderItem(item)}
-                    keyExtractor= {item=>item.ID.toString()}
-                    refreshing = {this.state.refreshing}
-                    onRefresh = {this.handleRefresh}
-                />
+            <View style={{backgroundColor: 'black', flex:1, margin: 0}}>
+                <View style={styles.styleContainer}>
+                    <View style={{color: "#FADED7", /*backgroundColor:style.backgroundColor,*/ flex:1 , alignItems:"center" , justifyContent: 'flex-start' }}>
+                        <FlatList
+                            data={this.state.dataSource}
+                            ItemSeparatorComponent = {this.FlatListItemSeperator}
+                            renderItem={({ item }) => this.renderItem(item)}
+                            keyExtractor= {item=>item.ID.toString()}
+                            refreshing = {this.state.refreshing}
+                            onRefresh = {this.handleRefresh}
+                        />
+                    </View>
+                </View>
             </View>
         )
     } 
 }
 
 const styles = StyleSheet.create({
+    styleContainer: {
+        color: "#FADED7",
+        backgroundColor:"#4254f5",
+        flex:1 , alignItems:"center",
+        justifyContent: 'flex-start',
+        margin: 40,
+        borderRadius: 30
+    },
     container: {
       flex: 1,
-      top:50,
-      
-      
+      top:50,     
       justifyContent:"center"
      },
     loader:{
@@ -112,7 +122,7 @@ const styles = StyleSheet.create({
     list:{
       paddingVertical: 4,
       margin: 5,
-      backgroundColor: "#101820FF"
+      backgroundColor: "#4254f5"
      },
      text:{
         fontSize: 18,
